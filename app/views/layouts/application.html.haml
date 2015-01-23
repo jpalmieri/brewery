@@ -12,5 +12,7 @@
       = flash[:notice]
     - if flash[:error]
       = flash[:error]
+    - if flash[:alert]
+      = flash[:alert]
 
     = yield
