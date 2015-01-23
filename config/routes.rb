@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   get 'welcome/index'
   get 'welcome/about'
   get 'welcome/contact'
+
+  resources :recipes, only: [:new, :create, :show, :index]
 
   root to: 'welcome#index'
 
