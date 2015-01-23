@@ -1,0 +1,9 @@
+%h1 New Recipe
+
+= form_for @recipe do |form|
+  = form.text_field :name, autofocus: true, placeholder: 'Name'
+  = form.text_field :style, autofocus: true, placeholder: 'Style'
+  = form.text_field :yeast, autofocus: true, placeholder: 'Yeast'
+  = form.text_field :summary, autofocus: true, placeholder: 'Summary'
+  = form.text_field :notes, autofocus: true, placeholder: 'Notes'
+  = form.submit 'Save Recipe'
