@@ -21,4 +21,14 @@ feature "User creates recipes", :type => :feature do
     expect(page).to have_content("Recipe saved.")
   end
 
+  scenario "unsuccessfully" do 
+    visit new_recipe_path
+    fill_in "Yeast", with: "Nottingham"
+
+    click_button "Save Recipe"
+
+    expect(current_path).to eq new_recipe_path
+    expect(page).to have_content("Name can't be blank")
+  end
+
 end
