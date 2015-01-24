@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 feature "User creates recipes", :type => :feature do
+
+  before do
+    user = create(:user)
+    sign_in(user)
+  end
   
   scenario "successfully" do
     visit new_recipe_path
