@@ -2,10 +2,15 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    3.times { @recipe.grains.build }
   end
 
   def create
     @recipe = current_user.recipes.create(recipe_params)
+    @recipe.grains.each do |grain|
+      grain.weight.to_f
+      grain.save
+    end
     if @recipe.save
       flash[:notice] = "Recipe saved."
       redirect_to @recipe
@@ -22,6 +27,6 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :style, :yeast, :summary, :notes)
+    params.require(:recipe).permit(:name, :style, :grains, :yeast, :summary, :notes)
   end
 end
