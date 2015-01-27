@@ -22,7 +22,7 @@
     - if flash[:notice]
       = flash[:notice]
     - if flash[:error]
-      = flash[:error]
+      = flash[:error].html_safe
     - if flash[:alert]
       = flash[:alert]
 
