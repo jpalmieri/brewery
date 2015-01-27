@@ -5,3 +5,7 @@
 = @recipe.yeast
 = @recipe.summary
 = @recipe.notes
+- @recipe.grains.each do |grain|
+  %p
+    = grain.name
+    = grain.weight
