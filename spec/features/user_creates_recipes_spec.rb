@@ -21,7 +21,8 @@ feature "User creates recipes", :type => :feature do
 
     click_button "Save Recipe"
 
-    expect(current_path).to eq recipe_path(id: Recipe.first)
+    expect(Recipe.count).to eq(1)
+    expect(current_path).to eq recipe_path(Recipe.first)
     expect(page).to have_content("Black Stout")
     expect(page).to have_content("Nottingham")
     expect(page).to have_content("2-row")
