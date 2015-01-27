@@ -43,6 +43,7 @@ feature "User creates recipes", :type => :feature do
 
     expect(current_path).to eq new_recipe_path
     expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("must include name and weight of at least one grain")
   end
 
 end

@@ -11,7 +11,12 @@ class RecipesController < ApplicationController
       flash[:notice] = "Recipe saved."
       redirect_to @recipe
     else
-      flash[:error] = "There was an error saving your recipe: #{@recipe.errors.full_messages.first}"
+      error_list = "<ul>"
+      @recipe.errors.full_messages.each do |error|
+        error_list += "<li>#{error}"
+      end
+      error_list += "</ul>"
+      flash[:error] = "There was an error saving your recipe: #{error_list}"
       redirect_to new_recipe_path
     end
   end

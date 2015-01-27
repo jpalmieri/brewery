@@ -13,6 +13,7 @@ describe Recipe do
   context "validations" do
     it { expect(@recipe).to validate_presence_of(:name) }
     it { expect(@recipe).to validate_presence_of(:user_id) }
+    it { expect(@recipe).to validate_presence_of(:grains).with_message(/must include name and weight of at least one grain/) }
   end
 
 end
