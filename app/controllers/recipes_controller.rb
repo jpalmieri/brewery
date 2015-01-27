@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    3.times { @recipe.grains.build }
   end
 
   def create
@@ -22,6 +23,6 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :style, :yeast, :summary, :notes)
+    params.require(:recipe).permit(:name, :style, :yeast, :summary, :notes, grains_attributes: [:name, :weight])
   end
 end

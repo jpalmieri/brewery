@@ -4,6 +4,11 @@
   = form.text_field :name, autofocus: true, placeholder: 'Name'
   = form.text_field :style, autofocus: true, placeholder: 'Style'
   = form.text_field :yeast, autofocus: true, placeholder: 'Yeast'
+  = form.fields_for :grains do |grain_fields|
+    = grain_fields.label :name, "Grain #{grain_fields.index + 1} name"
+    = grain_fields.text_field :name
+    = grain_fields.label :weight, "Grain #{grain_fields.index + 1} weight"
+    = grain_fields.number_field :weight
   = form.text_field :summary, autofocus: true, placeholder: 'Summary'
   = form.text_field :notes, autofocus: true, placeholder: 'Notes'
   = form.submit 'Save Recipe'
