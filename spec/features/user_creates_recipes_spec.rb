@@ -18,7 +18,7 @@ feature "User creates recipes", :type => :feature do
     fill_in "Grain 2 weight", with: "2.25" 
     fill_in "Summary", with: "A very dark stout"
     fill_in "Notes", with: "Brew very carefully..."
-
+    
     click_button "Save Recipe"
 
     expect(Recipe.count).to eq(1)
@@ -41,9 +41,17 @@ feature "User creates recipes", :type => :feature do
 
     click_button "Save Recipe"
 
-    expect(current_path).to eq new_recipe_path
+    expect(current_path).to eq recipes_path
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("must include name and weight of at least one grain")
+    expect(page).to have_selector("input[value='Nottingham']")
+    # grain inputs must reappear on render: new
+    expect(page).to have_content("Grain 1 name")
+    expect(page).to have_content("Grain 1 weight")
+    expect(page).to have_content("Grain 2 name")
+    expect(page).to have_content("Grain 2 weight")
+    expect(page).to have_content("Grain 3 name")
+    expect(page).to have_content("Grain 3 weight")
   end
 
 end
