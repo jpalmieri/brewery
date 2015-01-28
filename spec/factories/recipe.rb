@@ -11,6 +11,14 @@ FactoryGirl.define do
       recipe.grains_attributes = grains_attributes
     end
 
+    before(:create) do |recipe, hop|
+      hops_attributes = []
+      2.times do 
+        hops_attributes << attributes_for(:hop)
+      end
+      recipe.hops_attributes = hops_attributes
+    end
+
     yeast "Yeast"
     summary "Summary"
     notes "Notes notes notes"
