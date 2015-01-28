@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe "Sign in flow" do
+feature "Sign in flow" do
 
-  describe "successful" do
-    it "redirects to the recipe index" do
+  feature "successful" do
+    scenario "redirects to the recipe index" do
       user = create(:user)
       sign_in(user)
 
