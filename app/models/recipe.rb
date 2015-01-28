@@ -1,7 +1,18 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
-  has_many :grains, dependent: :destroy
-  accepts_nested_attributes_for :grains, reject_if: proc { |attributes| attributes['name'].blank? || attributes['weight'].blank? }
+  has_many :grains, dependent: :destroy do
+    # Return the number of open grain spots. Say we have 2 grains already
+    # specified for the recipe, then `remaining_capacity` would be 1. (Assuming
+    # max capacity is 3 grains).
+    # More about Association Extensions:
+    # http://guides.rubyonrails.org/association_basics.html#association-extensions
+    def remaining_capacity
+      max_capacity = 3
+      max_capacity - proxy_association.target.size
+    end
+  end
+
+  accepts_nested_attributes_for :grains, reject_if: proc { |attributes| attributes['name'].blank? && attributes['weight'].blank? }
 
   validates :name, presence: true
   validates :user_id, presence: true

@@ -2,7 +2,6 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    3.times { @recipe.grains.build }
   end
 
   def create
@@ -17,7 +16,7 @@ class RecipesController < ApplicationController
       end
       error_list += "</ul>"
       flash[:error] = "There was an error saving your recipe: #{error_list}"
-      redirect_to new_recipe_path
+      render :new
     end
   end
 

@@ -4,6 +4,7 @@
   = form.text_field :name, autofocus: true, placeholder: 'Name'
   = form.text_field :style, autofocus: true, placeholder: 'Style'
   = form.text_field :yeast, autofocus: true, placeholder: 'Yeast'
+  - @recipe.grains.remaining_capacity.times { @recipe.grains.build }
   = form.fields_for :grains do |grain_fields|
     = grain_fields.label :name, "Grain #{grain_fields.index + 1} name"
     = grain_fields.text_field :name
