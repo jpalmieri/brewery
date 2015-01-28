@@ -1,12 +1,12 @@
 %h1
   = @recipe.name
 
-= @recipe.style
-= @recipe.yeast
-= @recipe.summary
-= @recipe.notes
+%p Style: #{@recipe.style}
+%p Yeast: #{@recipe.yeast}
+%p Summary: #{@recipe.summary}
+%p Grains:
 - @recipe.grains.each do |grain|
   %p
     = grain.name
     = grain.weight
-    
+%p Notes: #{@recipe.notes}
