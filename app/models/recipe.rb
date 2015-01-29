@@ -13,11 +13,6 @@ class Recipe < ActiveRecord::Base
   end
 
   has_many :hops, dependent: :destroy do
-    # Return the number of open grain spots. Say we have 2 grains already
-    # specified for the recipe, then `remaining_capacity` would be 1. (Assuming
-    # max capacity is 3 grains).
-    # More about Association Extensions:
-    # http://guides.rubyonrails.org/association_basics.html#association-extensions
     def remaining_capacity
       max_capacity = 2
       max_capacity - proxy_association.target.size
