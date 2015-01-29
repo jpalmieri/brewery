@@ -32,7 +32,7 @@ feature "Sign in flow" do
       click_button "Log in"
 
       expect(page).to have_content("Your account is locked due to 5 failed attempts.")
-      expect(page).to have_content("Please allow 5 minutes before attempting to log in again.")
+      expect(page).to have_content("Please allow 15 minutes before attempting to log in again.")
     end
   end
 end
