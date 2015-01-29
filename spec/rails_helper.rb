@@ -28,7 +28,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Include SignInHelper only in feature specs
-  config.include SignInHelper, type: :feature
+  config.include FeatureHelper, type: :feature
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
