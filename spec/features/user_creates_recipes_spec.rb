@@ -34,40 +34,21 @@ feature "User creates recipe", :type => :feature do
     expect(page).to have_content("Recipe saved.")
   end
 
-  scenario "unsuccessfully, no recipe name" do 
-    fill_in "Grain 1 name", with: "2-row"
-    fill_in "Grain 1 weight", with: "10"
-    fill_in "Grain 2 name", with: "Crystal 40L"
-    fill_in "Grain 2 weight", with: "2.25" 
-
+  scenario "unsuccessfully, without required fields" do 
+    
     click_button "Save Recipe"
 
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Name can't be blank")
-    expect(page).to have_selector("input[value='Stout']")
-    expect(page).to have_selector("input[value='Nottingham']")
-    expect(page).to have_selector("input[value='2-row']")
-    expect(page).to have_selector("input[value='10']")
-    expect(page).to have_selector("input[value='Crystal 40L']")
-    expect(page).to have_selector("input[value='2.25']")
-    expect(page).to have_selector("input[value='A very dark stout']")
-    expect(page).to have_selector("input[value='Brew very carefully...']")
-    # unused grain inputs must reappear on render: new
-    expect(page).to have_content("Grain 3 name")
-    expect(page).to have_content("Grain 3 weight")
-  end
-
-  scenario "unsuccessfully, no grains at all" do 
-    fill_in "Name", with: "Black Stout"
-    click_button "Save Recipe"
-
-    expect(current_path).to eq recipes_path
     expect(page).to have_content("must include name and weight of at least one grain")
+
+    # check that field values persist
     expect(page).to have_selector("input[value='Stout']")
     expect(page).to have_selector("input[value='Nottingham']")
     expect(page).to have_selector("input[value='A very dark stout']")
     expect(page).to have_selector("input[value='Brew very carefully...']")
-    # unused grain inputs must reappear on render: new
+
+    # check that grain fields show
     expect(page).to have_content("Grain 1 name")
     expect(page).to have_content("Grain 1 weight")
     expect(page).to have_content("Grain 2 name")
@@ -76,46 +57,24 @@ feature "User creates recipe", :type => :feature do
     expect(page).to have_content("Grain 3 weight")
   end
 
-  scenario "unsuccessfully, grain name but no weight" do 
+  scenario "unsuccessfully, without grain weight" do 
     fill_in "Name", with: "Black Stout"
     fill_in "Grain 1 name", with: "2-row"
     click_button "Save Recipe"
 
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Grains weight can't be blank")
-    expect(page).to have_selector("input[value='Stout']")
-    expect(page).to have_selector("input[value='Nottingham']")
     expect(page).to have_selector("input[value='2-row']")
-    expect(page).to have_selector("input[value='A very dark stout']")
-    expect(page).to have_selector("input[value='Brew very carefully...']")
-    # unused grain inputs must reappear on render: new
-    expect(page).to have_content("Grain 1 name")
-    expect(page).to have_content("Grain 1 weight")
-    expect(page).to have_content("Grain 2 name")
-    expect(page).to have_content("Grain 2 weight")
-    expect(page).to have_content("Grain 3 name")
-    expect(page).to have_content("Grain 3 weight")
   end
 
-  scenario "unsuccessfully, grain weight but no name" do 
+  scenario "unsuccessfully, without grain name" do 
     fill_in "Name", with: "Black Stout"
     fill_in "Grain 1 weight", with: "10"
     click_button "Save Recipe"
 
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Grains name can't be blank")
-    expect(page).to have_selector("input[value='Stout']")
-    expect(page).to have_selector("input[value='Nottingham']")
     expect(page).to have_selector("input[value='10']")
-    expect(page).to have_selector("input[value='A very dark stout']")
-    expect(page).to have_selector("input[value='Brew very carefully...']")
-    # unused grain inputs must reappear on render: new
-    expect(page).to have_content("Grain 1 name")
-    expect(page).to have_content("Grain 1 weight")
-    expect(page).to have_content("Grain 2 name")
-    expect(page).to have_content("Grain 2 weight")
-    expect(page).to have_content("Grain 3 name")
-    expect(page).to have_content("Grain 3 weight")
   end
 
 end
