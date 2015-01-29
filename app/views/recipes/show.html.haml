@@ -9,4 +9,9 @@
   %p
     = grain.name
     = grain.weight
+%p Hops:    
+- @recipe.hops.each do |hop|
+  %p
+    = hop.name
+    = hop.weight
 %p Notes: #{@recipe.notes}

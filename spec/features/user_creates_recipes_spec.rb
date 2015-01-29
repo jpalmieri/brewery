@@ -18,6 +18,8 @@ feature "User creates recipe", :type => :feature do
     fill_in "Grain 1 weight", with: "10"
     fill_in "Grain 2 name", with: "Crystal 40L"
     fill_in "Grain 2 weight", with: "2.25" 
+    fill_in "Hop 1 name", with: "Cascade"
+    fill_in "Hop 1 weight", with: "1.5"
 
     click_button "Save Recipe"
 
@@ -29,6 +31,8 @@ feature "User creates recipe", :type => :feature do
     expect(page).to have_content("10")
     expect(page).to have_content("Crystal 40L")
     expect(page).to have_content("2.25")
+    expect(page).to have_content("Cascade")
+    expect(page).to have_content("1.5")
     expect(page).to have_content("A very dark stout")
     expect(page).to have_content("Brew very carefully...")
     expect(page).to have_content("Recipe saved.")
@@ -41,6 +45,7 @@ feature "User creates recipe", :type => :feature do
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("must include name and weight of at least one grain")
+    expect(page).to have_content("must include name and weight of at least one hop")
 
     # check that field values persist
     expect(page).to have_selector("input[value='Stout']")
@@ -57,24 +62,30 @@ feature "User creates recipe", :type => :feature do
     expect(page).to have_content("Grain 3 weight")
   end
 
-  scenario "unsuccessfully, without grain weight" do 
+  scenario "unsuccessfully, without grain and hop weights" do 
     fill_in "Name", with: "Black Stout"
     fill_in "Grain 1 name", with: "2-row"
+    fill_in "Hop 1 name", with: "Cascade"
     click_button "Save Recipe"
 
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Grains weight can't be blank")
     expect(page).to have_selector("input[value='2-row']")
+    expect(page).to have_content("Hops weight can't be blank")
+    expect(page).to have_selector("input[value='Cascade']")
   end
 
-  scenario "unsuccessfully, without grain name" do 
+  scenario "unsuccessfully, without grain and hop names" do 
     fill_in "Name", with: "Black Stout"
     fill_in "Grain 1 weight", with: "10"
+    fill_in "Hop 1 weight", with: "1.5"
     click_button "Save Recipe"
 
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Grains name can't be blank")
     expect(page).to have_selector("input[value='10']")
+    expect(page).to have_content("Hops name can't be blank")
+    expect(page).to have_selector("input[value='1.5']")
   end
 
 end
