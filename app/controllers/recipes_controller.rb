@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
     else
       error_list = "<ul>"
       @recipe.errors.full_messages.each do |error|
-        error_list += "<li>#{error}"
+        error_list += "<li>#{error}</li>"
       end
       error_list += "</ul>"
       flash[:error] = "There was an error saving your recipe: #{error_list}"
