@@ -19,11 +19,17 @@ feature "Sign in flow" do
 
       visit new_user_session_path
 
-      5.times do
+      4.times do
         fill_in "Email", with: user.email
         fill_in "Password", with: "incorrect-password"
         click_button "Log in"
       end
+
+      expect(page).to have_content("You have one more attempt before your account is locked.")
+
+      fill_in "Email", with: user.email
+      fill_in "Password", with: "incorrect-password"
+      click_button "Log in"
 
       expect(page).to have_content("Your account is locked due to 5 failed attempts.")
       expect(page).to have_content("Please allow 5 minutes before attempting to log in again.")
