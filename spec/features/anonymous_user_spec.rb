@@ -14,10 +14,11 @@ feature "Anonymous user" do
 
   feature "views saved recipe" do
     scenario "successfully" do
-      recipe = create(:recipe)
+      recipe = create(:recipe, name: 'Golden Lager')
       visit recipe_path(Recipe.first)
       
       expect(current_path).to eq recipe_path(Recipe.first)
+      expect(page).to have_content('Golden Lager')
     end
   end
 end
