@@ -11,7 +11,7 @@
       = grain_fields.text_field :name
     %p
       = grain_fields.label :weight, "Grain #{grain_fields.index + 1} weight"
-      = grain_fields.number_field :weight
+      = grain_fields.number_field :weight, step: 0.05, min: 0.05
   - @recipe.hops.remaining_capacity.times { @recipe.hops.build }
   = form.fields_for :hops do |hop_fields|
     %p
@@ -19,7 +19,7 @@
       = hop_fields.text_field :name
     %p
       = hop_fields.label :weight, "Hop #{hop_fields.index + 1} weight"
-      = hop_fields.number_field :weight
+      = hop_fields.number_field :weight, step: 0.05, min: 0.05
   = form.text_field :summary, placeholder: 'Summary'
   = form.text_field :notes, placeholder: 'Notes'
   = form.submit 'Save Recipe'
