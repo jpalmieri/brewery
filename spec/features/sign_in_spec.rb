@@ -15,7 +15,7 @@ feature "Sign in flow" do
 
   feature "unsuccessfully" do
     scenario "locked out after 5 attempts" do
-      user = authenticated_user
+      user = create(:user)
 
       visit new_user_session_path
 
