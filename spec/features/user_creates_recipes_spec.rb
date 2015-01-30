@@ -37,6 +37,7 @@ expect(page).to have_content("Black Stout")
     expect(page).to have_content("1.5")
     expect(page).to have_content("A very dark stout")
     expect(page).to have_content("Brew very carefully...")
+    expect(page).to have_content("1.068")
     expect(page).to have_content("Recipe saved.")
   end
 

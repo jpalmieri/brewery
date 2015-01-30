@@ -35,4 +35,19 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :grains,  message: "must include name and weight of at least one grain"
   validates_presence_of :hops,  message: "must include name and weight of at least one hop"
   
+
+  def original_gravity
+    brewhouse_efficiency = 0.75
+    batch_size = 5
+    (((37 * brewhouse_efficiency) / (batch_size / total_grain_weight)) + 1000) / 1000
+  end
+
+  def total_grain_weight
+    total_weight = 0
+    grains.each do |grain|
+      total_weight += grain.weight
+    end
+    total_weight
+  end
+
 end
