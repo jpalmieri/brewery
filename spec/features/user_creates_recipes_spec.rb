@@ -7,7 +7,8 @@ feature "User creates recipe", :type => :feature do
     sign_in(user)
     visit new_recipe_path
     fill_in "Style", with: "Stout"
-    fill_in "Yeast", with: "Nottingham"
+    fill_in "Yeast name", with: "Nottingham"
+    fill_in "Yeast attenuation", with: "78"
     fill_in "Summary", with: "A very dark stout"
     fill_in "Notes", with: "Brew very carefully..."
   end
@@ -27,6 +28,7 @@ feature "User creates recipe", :type => :feature do
     expect(current_path).to eq recipe_path(Recipe.first)
     expect(page).to have_content("Black Stout")
     expect(page).to have_content("Nottingham")
+    expect(page).to have_content("78")
     expect(page).to have_content("2-row")
     expect(page).to have_content("10")
     expect(page).to have_content("Crystal 40L")
