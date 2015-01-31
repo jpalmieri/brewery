@@ -43,11 +43,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def total_grain_weight
-    total_weight = 0
-    grains.each do |grain|
-      total_weight += grain.weight
-    end
-    total_weight
+    grains.sum(:weight)
   end
 
 end
