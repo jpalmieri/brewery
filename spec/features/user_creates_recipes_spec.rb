@@ -21,6 +21,7 @@ feature "User creates recipe", :type => :feature do
     fill_in "Grain 2 weight", with: "2.25" 
     fill_in "Hop 1 name", with: "Cascade"
     fill_in "Hop 1 weight", with: "1.5"
+    fill_in "Batch size", with: "5.25"
 
     click_button "Save Recipe"
 expect(page).to have_content("Black Stout")
@@ -38,9 +39,12 @@ expect(page).to have_content("Black Stout")
     expect(page).to have_content("A very dark stout")
     expect(page).to have_content("Brew very carefully...")
     expect(page).to have_content("Recipe saved.")
+    expect(page).to have_content("5.25 gal.")
   end
 
   scenario "unsuccessfully, without required fields" do 
+    # Batch size has default value in view
+    fill_in "Batch size", with: ""
     
     click_button "Save Recipe"
 
@@ -48,6 +52,7 @@ expect(page).to have_content("Black Stout")
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("must include name and weight of at least one grain")
     expect(page).to have_content("must include name and weight of at least one hop")
+    expect(page).to have_content("Batch size can't be blank")
 
     # check that field values persist
     expect(page).to have_selector("input[value='Stout']")
