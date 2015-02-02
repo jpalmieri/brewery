@@ -15,6 +15,8 @@ describe Recipe do
     it { expect(@recipe).to validate_presence_of(:user_id) }
     it { expect(@recipe).to validate_presence_of(:grains).with_message(/must include name and weight of at least one grain/) }
     it { expect(@recipe).to validate_presence_of(:hops).with_message(/must include name and weight of at least one hop/) }
+    it { expect(@recipe.total_grain_weight).to_not be_nil }
+    it { expect(@recipe.batch_size).to_not be_nil }
   end
 
 end

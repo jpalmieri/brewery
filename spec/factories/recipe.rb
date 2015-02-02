@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :recipe do
     name "Name"
     style "Style"
+    batch_size 2.5
 
     before(:create) do |recipe, yeast|
       yeasts_attributes = []
