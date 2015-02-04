@@ -7,6 +7,7 @@
   %p
     = yeast.name
     = yeast.attenuation
+%p Original Gravity: #{'%.3f' % @recipe.original_gravity}
 %p Summary: #{@recipe.summary}
 %p Grains:
 - @recipe.grains.each do |grain|
