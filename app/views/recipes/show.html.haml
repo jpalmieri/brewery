@@ -2,7 +2,11 @@
   = @recipe.name
 
 %p Style: #{@recipe.style}
-%p Yeast: #{@recipe.yeast}
+%p Yeast:
+- @recipe.yeasts.each do |yeast|
+  %p
+    = yeast.name
+    = yeast.attenuation
 %p Summary: #{@recipe.summary}
 %p Grains:
 - @recipe.grains.each do |grain|

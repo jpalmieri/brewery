@@ -19,8 +19,16 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  has_many :yeasts, dependent: :destroy do
+    def remaining_capacity
+      max_capacity = 1
+      max_capacity - proxy_association.target.size
+    end
+  end
+
   accepts_nested_attributes_for :grains, reject_if: proc { |attributes| attributes['name'].blank? && attributes['weight'].blank? }
   accepts_nested_attributes_for :hops, reject_if: proc { |attributes| attributes['name'].blank? && attributes['weight'].blank? }
+  accepts_nested_attributes_for :yeasts, reject_if: proc { |attributes| attributes['name'].blank? || attributes['attenuation'].blank? }
 
   validates :name, presence: true
   validates :user_id, presence: true

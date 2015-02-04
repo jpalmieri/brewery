@@ -23,7 +23,7 @@ feature "User creates recipe", :type => :feature do
     fill_in "Hop 1 weight", with: "1.5"
 
     click_button "Save Recipe"
-
+expect(page).to have_content("Black Stout")
     expect(Recipe.count).to eq(1)
     expect(current_path).to eq recipe_path(Recipe.first)
     expect(page).to have_content("Black Stout")

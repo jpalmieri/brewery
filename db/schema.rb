@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129220120) do
+ActiveRecord::Schema.define(version: 20150202170412) do
 
   create_table "grains", force: :cascade do |t|
     t.string   "name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150129220120) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.float    "batch_size"
   end
 
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
@@ -68,5 +69,15 @@ ActiveRecord::Schema.define(version: 20150129220120) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+
+  create_table "yeasts", force: :cascade do |t|
+    t.integer  "recipe_id"
+    t.string   "name"
+    t.decimal  "attenuation", precision: 4, scale: 3
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "yeasts", ["recipe_id"], name: "index_yeasts_on_recipe_id"
 
 end
