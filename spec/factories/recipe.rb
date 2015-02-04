@@ -3,6 +3,14 @@ FactoryGirl.define do
     name "Name"
     style "Style"
 
+    before(:create) do |recipe, yeast|
+      yeasts_attributes = []
+      3.times do 
+        yeasts_attributes << attributes_for(:yeast)
+      end
+      recipe.yeasts_attributes = yeasts_attributes
+    end
+
     before(:create) do |recipe, grain|
       grains_attributes = []
       3.times do 
@@ -19,7 +27,6 @@ FactoryGirl.define do
       recipe.hops_attributes = hops_attributes
     end
 
-    yeast "Yeast"
     summary "Summary"
     notes "Notes notes notes"
     user
