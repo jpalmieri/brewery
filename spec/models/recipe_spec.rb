@@ -28,4 +28,16 @@ describe Recipe do
     end
   end
 
+  context "#total_grain_weight" do
+    it "should calculate the total grain weight" do
+      recipe = create(:recipe)
+      recipe.grains.destroy_all
+      recipe.grains.build(name: "2-row", weight: 10)
+      recipe.grains.build(name: "Black Patent", weight: 2.5)
+      recipe.save
+
+      expect(recipe.total_grain_weight).to eq(12.5)
+    end
+  end
+
 end
