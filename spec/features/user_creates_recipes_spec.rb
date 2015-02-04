@@ -24,7 +24,7 @@ feature "User creates recipe", :type => :feature do
     fill_in "Batch size", with: "5.25"
 
     click_button "Save Recipe"
-expect(page).to have_content("Black Stout")
+
     expect(Recipe.count).to eq(1)
     expect(current_path).to eq recipe_path(Recipe.first)
     expect(page).to have_content("Black Stout")
@@ -53,7 +53,7 @@ expect(page).to have_content("Black Stout")
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("must include name and weight of at least one grain")
     expect(page).to have_content("must include name and weight of at least one hop")
-    expect(page).to have_content("Batch size can't be blank")
+    expect(page).to have_content("Batch size is not a number")
 
     # check that field values persist
     expect(page).to have_selector("input[value='Stout']")
