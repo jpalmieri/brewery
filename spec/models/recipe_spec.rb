@@ -19,4 +19,13 @@ describe Recipe do
     it { expect(@recipe.batch_size).to_not be_nil }
   end
 
+  context "#original_gravity" do
+
+    it "should calculate the original gravity" do
+      recipe = Recipe.new()
+      allow(recipe).to receive(:total_grain_weight) {9.5}
+      expect((recipe.original_gravity).round(3)).to eq(1.053)
+    end
+  end
+
 end
