@@ -3,19 +3,22 @@
 
 %p Style: #{@recipe.style}
 %p Yeast:
-- @recipe.yeasts.each do |yeast|
-  %p
-    = yeast.name
-    = yeast.attenuation
+%ul
+  - @recipe.yeasts.each do |yeast|
+    %li
+      = yeast.name
+      #{yeast.attenuation} %
 %p Summary: #{@recipe.summary}
 %p Grains:
-- @recipe.grains.each do |grain|
-  %p
-    = grain.name
-    = grain.weight
-%p Hops:    
-- @recipe.hops.each do |hop|
-  %p
-    = hop.name
-    = hop.weight
+%ul
+  - @recipe.grains.each do |grain|
+    %li
+      = grain.name
+      #{grain.weight} lbs.
+%p Hops:
+%ul
+  - @recipe.hops.each do |hop|
+    %li
+      = hop.name
+      = hop.weight
 %p Notes: #{@recipe.notes}
