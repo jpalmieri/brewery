@@ -9,7 +9,7 @@
   - @recipe.yeasts.each do |yeast|
     %li
       = yeast.name
-      #{yeast.attenuation} %
+      #{yeast.attenuation*100} %
 %p Summary: #{@recipe.summary}
 %p Grains:
 %ul
