@@ -2,6 +2,8 @@
   = @recipe.name
 
 %p Style: #{@recipe.style}
+%p Batch Size: #{@recipe.batch_size} gal.
+%p Original Gravity: #{'%.3f' % @recipe.original_gravity}
 %p Yeast:
 %ul
   - @recipe.yeasts.each do |yeast|
