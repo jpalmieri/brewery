@@ -8,7 +8,7 @@
   = form.fields_for :yeasts do |yeast_fields|
     %p
       = yeast_fields.text_field :name, placeholder: 'Yeast name'
-      = yeast_fields.number_field :attenuation, placeholder: 'Yeast attenuation', step: 0.5, min: 0.5
+      = yeast_fields.number_field :attenuation, placeholder: 'Yeast attenuation', min: 0.5
 
   = form.number_field :batch_size, placeholder: 'Batch size', step: 0.05, min: 0.05, value: 5
   - @recipe.grains.remaining_capacity.times { @recipe.grains.build }
