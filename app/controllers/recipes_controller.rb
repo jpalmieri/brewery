@@ -21,6 +21,21 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+    if @recipe.update_attributes(recipe_params)
+      flash[:notice] = "Recipe updated."
+      redirect_to @recipe
+    else
+      flash[:error] = "There was an error saving the recipe. Please try again."
+      render :edit
+    end
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
   end
@@ -35,9 +50,9 @@ class RecipesController < ApplicationController
       :summary,
       :notes,
       :batch_size,
-      grains_attributes: [:name, :weight],
-      hops_attributes: [:name, :weight, :boil_time],
-      yeasts_attributes: [:name, :attenuation]
+      grains_attributes: [:name, :weight, :id],
+      hops_attributes: [:name, :weight, :boil_time, :id],
+      yeasts_attributes: [:name, :attenuation, :id]
     )
   end
 end

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'welcome/about'
   get 'welcome/contact'
 
-  resources :recipes, only: [:new, :create, :show, :index]
+  resources :recipes, only: [:new, :create, :show, :index, :edit, :update]
 
   root to: 'welcome#index'
 

@@ -1,0 +1,35 @@
+%h1 New Recipe
+
+= form_for @recipe do |form|
+  = form.text_field :name, autofocus: true, placeholder: 'Name'
+  = form.text_field :style, placeholder: 'Style'
+
+  - @recipe.yeasts.remaining_capacity.times { @recipe.yeasts.build }
+  = form.fields_for :yeasts do |yeast_fields|
+    %p
+      // -puts yeast_fields
+      = yeast_fields.text_field :name, placeholder: 'Yeast name'
+      = yeast_fields.number_field :attenuation, placeholder: 'Yeast attenuation', min: 0.5, value: @recipe.yeasts[yeast_fields.index].attenuation.to_f * 100
+      = "%"
+
+  = form.number_field :batch_size, placeholder: 'Batch size', step: 0.05, min: 0.05
+  - @recipe.grains.remaining_capacity.times { @recipe.grains.build }
+  = form.fields_for :grains do |grain_fields|
+    %p
+      = grain_fields.label :name, "Grain #{grain_fields.index + 1} name"
+      = grain_fields.text_field :name
+    %p
+      = grain_fields.label :weight, "Grain #{grain_fields.index + 1} weight"
+      = grain_fields.number_field :weight, step: 0.05, min: 0.05
+
+  - @recipe.hops.remaining_capacity.times { @recipe.hops.build }
+  = form.fields_for :hops do |hop_fields|
+    %p
+      = hop_fields.label :name, "Hop #{hop_fields.index + 1} name"
+      = hop_fields.text_field :name
+    %p
+      = hop_fields.label :weight, "Hop #{hop_fields.index + 1} weight"
+      = hop_fields.number_field :weight, step: 0.05, min: 0.05
+  = form.text_field :summary, placeholder: 'Summary'
+  = form.text_field :notes, placeholder: 'Notes'
+  = form.submit 'Save Recipe'
