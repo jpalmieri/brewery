@@ -53,4 +53,13 @@ feature "User edits recipe", :type => :feature do
     expect(page).to have_content("Recipe updated.")
     expect(page).to have_content("11.25 gal.")
   end
+
+  scenario "unsuccessfully, user doesn't own recipe" do
+    other_user = create(:user)
+    other_recipe = create(:recipe, user: other_user)
+    visit edit_recipe_path(other_recipe)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content("You are not authorized to edit this recipe.")
+  end
 end
