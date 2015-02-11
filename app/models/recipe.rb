@@ -39,7 +39,6 @@ class Recipe < ActiveRecord::Base
 
   def original_gravity
     brewhouse_efficiency = 0.75
-    batch_size = 5
     (((37 * brewhouse_efficiency) / (batch_size / total_grain_weight)) + 1000) / 1000
   end
 
