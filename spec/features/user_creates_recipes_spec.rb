@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User creates recipe", :type => :feature do
+feature "User creates recipe", js: true, :type => :feature do
 
   before do
     user = create(:user)
@@ -17,6 +17,8 @@ feature "User creates recipe", :type => :feature do
     fill_in "Name", with: "Black Stout"
     fill_in "Grain 1 name", with: "2-row"
     fill_in "Grain 1 weight", with: "10"
+    expect(page).not_to have_content("Grain 2")
+    click_button "Add grain"
     fill_in "Grain 2 name", with: "Crystal 40L"
     fill_in "Grain 2 weight", with: "2.25" 
     fill_in "Hop 1 name", with: "Cascade"
@@ -64,10 +66,6 @@ feature "User creates recipe", :type => :feature do
     # check that grain fields show
     expect(page).to have_content("Grain 1 name")
     expect(page).to have_content("Grain 1 weight")
-    expect(page).to have_content("Grain 2 name")
-    expect(page).to have_content("Grain 2 weight")
-    expect(page).to have_content("Grain 3 name")
-    expect(page).to have_content("Grain 3 weight")
   end
 
   scenario "unsuccessfully, without grain and hop weights" do 
@@ -94,6 +92,32 @@ feature "User creates recipe", :type => :feature do
     expect(page).to have_selector("input[value='10']")
     expect(page).to have_content("Hops name can't be blank")
     expect(page).to have_selector("input[value='1.5']")
+  end
+
+  scenario "unsuccessfully, additional grains persist" do 
+    fill_in "Name", with: "Black Stout"
+    fill_in "Grain 1 name", with: "2-row"
+    fill_in "Grain 1 weight", with: "10"
+    click_button "Add grain"
+    fill_in "Grain 2 name", with: "Crystal 40L"
+    fill_in "Grain 2 weight", with: "1.5"
+    click_button "Add grain"
+    fill_in "Grain 2 name", with: "Crystal 40L"
+    fill_in "Grain 2 weight", with: "1.5"
+    click_button "Save Recipe"
+
+    expect(current_path).to eq recipes_path
+    expect(page).to have_content("Grain 1 name")
+    expect(page).to have_selector("input[value='2-row']")
+    expect(page).to have_content("Grain 1 weight")
+    expect(page).to have_selector("input[value='10']")
+    expect(page).to have_content("Grain 2 name")
+    expect(page).to have_selector("input[value='Crystal 40L']")
+    expect(page).to have_content("Grain 2 weight")
+    expect(page).to have_selector("input[value='1.5']")
+
+    # Only last "Add grain" button should be visible
+    expect(page).to have_button("Add grain", count: 1)
   end
 
 end
