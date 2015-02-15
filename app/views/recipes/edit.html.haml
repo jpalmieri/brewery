@@ -7,7 +7,6 @@
   - @recipe.yeasts.remaining_capacity.times { @recipe.yeasts.build }
   = form.fields_for :yeasts do |yeast_fields|
     %p
-      // -puts yeast_fields
       = yeast_fields.text_field :name, placeholder: 'Yeast name'
       = yeast_fields.number_field :attenuation, placeholder: 'Yeast attenuation', min: 0.5, value: @recipe.yeasts[yeast_fields.index].attenuation.to_f * 100
       = "%"

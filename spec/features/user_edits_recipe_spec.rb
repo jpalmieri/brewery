@@ -54,6 +54,31 @@ feature "User edits recipe", :type => :feature do
     expect(page).to have_content("11.25 gal.")
   end
 
+  scenario "unsuccessfully, without required fields" do
+    fill_in "Name", with: ""
+    fill_in "Batch size", with: ""
+    fill_in "Grain 1 name", with: ""
+    fill_in "Grain 1 weight", with: ""
+    fill_in "Hop 1 name", with: ""
+    fill_in "Hop 1 weight", with: ""
+    fill_in "Grain 2 name", with: ""
+    fill_in "Grain 2 weight", with: ""
+    fill_in "Hop 2 name", with: ""
+    fill_in "Hop 2 weight", with: ""
+    fill_in "Grain 3 name", with: ""
+    fill_in "Grain 3 weight", with: ""
+
+
+    click_button "Save Recipe"
+
+    expect(current_path).to eq recipe_path(Recipe.first)
+    expect(page).to have_content("There was an error saving your recipe")
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("must include name and weight of at least one grain")
+    expect(page).to have_content("must include name and weight of at least one hop")
+    expect(page).to have_content("Batch size is not a number")
+  end
+
   scenario "unsuccessfully, user doesn't own recipe" do
     other_user = create(:user)
     other_recipe = create(:recipe, user: other_user)
