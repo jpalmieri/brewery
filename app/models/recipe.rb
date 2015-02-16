@@ -28,9 +28,9 @@ class Recipe < ActiveRecord::Base
 
   accepts_nested_attributes_for :grains, allow_destroy: true
   accepts_nested_attributes_for :hops, allow_destroy: true
-  accepts_nested_attributes_for :yeasts, reject_if: proc { |attributes| attributes['name'].blank? || attributes['attenuation'].blank? }
+  accepts_nested_attributes_for :yeasts, allow_destroy: true
 
-  before_validation :reject_blank_grains_and_hops
+  before_validation :reject_blank_ingredients
 
   validates :name, presence: true
   validates :user_id, presence: true
@@ -60,10 +60,10 @@ class Recipe < ActiveRecord::Base
     grains.sum(:weight)
   end
 
-  def reject_blank_grains_and_hops
-    [grains, hops].each do |grain_or_hop|
-      grain_or_hop.each do |ingredient|
-        if ingredient.weight.blank? && ingredient.name.blank?
+  def reject_blank_ingredients
+    [grains, hops, yeasts].each do |ingredients|
+      ingredients.each do |ingredient|
+        if ingredient.blank?
           ingredient.mark_for_destruction
         end
       end
