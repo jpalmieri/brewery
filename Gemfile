@@ -4,6 +4,7 @@ gem 'haml'
 gem 'devise'
 gem 'figaro'
 gem 'jquery-turbolinks'
+gem 'bootstrap-sass'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
