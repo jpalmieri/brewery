@@ -3,27 +3,28 @@
   %head
     %title Brewery
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body
-    = link_to "Brewery", root_path
-    = link_to "New Recipe", new_recipe_path
-
-    .user-info
-      - if user_signed_in?
-        = current_user.email
-        = link_to "Sign out", destroy_user_session_path, method: :delete
-      - else
-        = link_to "Sign In", new_user_session_path
-        or
-        = link_to "Sign Up", new_user_registration_path
+    = render partial: 'common/navbar'
 
     - if flash[:notice]
-      = flash[:notice]
+      .alert.alert-success
+        %button.close{type: 'button', "data-dismiss" => 'alert'}
+          &times
+        = flash[:notice]
     - if flash[:error]
-      = flash[:error].html_safe
+      .alert.alert-danger
+        %button.close{type: 'button', "data-dismiss" => 'alert'}
+          &times
+        = flash[:error].html_safe
     - if flash[:alert]
-      = flash[:alert]
+      .alert.alert-warning
+        %button.close{type: 'button', "data-dismiss" => 'alert'}
+          &times 
+        = flash[:alert]
 
-    = yield
+    .container
+      = yield

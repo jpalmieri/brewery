@@ -9,7 +9,7 @@ feature "Sign in flow" do
 
       expect(current_path).to eq root_path
       expect(page).to_not have_css(".user-info", text: "Sign In")
-      expect(page).to have_css(".user-info", text: user.email)
+      expect(page).to have_css(".user-info", text: user.name)
     end
   end
 
@@ -22,14 +22,14 @@ feature "Sign in flow" do
       4.times do
         fill_in "Email", with: user.email
         fill_in "Password", with: "incorrect-password"
-        click_button "Log in"
+        click_button "Sign in"
       end
 
       expect(page).to have_content("You have one more attempt before your account is locked.")
 
       fill_in "Email", with: user.email
       fill_in "Password", with: "incorrect-password"
-      click_button "Log in"
+      click_button "Sign in"
 
       expect(page).to have_content("Your account is locked due to 5 failed attempts.")
       expect(page).to have_content("Please allow 15 minutes before attempting to log in again.")

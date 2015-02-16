@@ -10,7 +10,7 @@ module FeatureHelper
     fill_in 'Password', with: user.password
 
     within 'form' do
-      click_button 'Log in'
+      click_button 'Sign in'
     end
     expect( page ).to have_content("Signed in successfully.")
   end
