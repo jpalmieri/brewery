@@ -47,9 +47,34 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_content("A very dark stout")
     expect(page).to have_content("Brew very carefully...")
     expect(page).to have_content("1.065")
+    expect(page).to have_content("Final Gravity")
+    expect(page).to have_content("1.014")
     expect(page).to have_content("Recipe saved.")
     expect(page).to have_content("5.25 gal.")
     expect(page).to have_content("60")
+  end
+
+  scenario "successfully, without yeast" do
+    fill_in "Enter a yeast name", with: ""
+    fill_in "Enter the yeast's average attenuation", with: ""
+
+    fill_in "Name", with: "Black Stout"
+    fill_in "Grain 1 name", with: "2-row"
+    fill_in "Grain 1 weight", with: "10"
+    click_button "Add grain"
+    fill_in "Grain 2 name", with: "Crystal 40L"
+    fill_in "Grain 2 weight", with: "2.25" 
+    fill_in "Hop 1 name", with: "Cascade"
+    fill_in "Hop 1 weight", with: "1.5"
+    fill_in "Hop 1 boil time", with: "30"
+    fill_in "Batch size", with: "5.25"
+
+    click_button "Save Recipe"
+
+    expect(Recipe.count).to eq(1)
+    expect(current_path).to eq recipe_path(Recipe.first)
+    expect(page).to_not have_content("1.014")
+    expect(page).to_not have_content("Final Gravity")
   end
 
   scenario "unsuccessfully, without required fields" do 

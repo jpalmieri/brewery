@@ -30,6 +30,16 @@ describe Recipe do
     end
   end
 
+  context "#final_gravity" do
+
+    it "should calculate the final gravity" do
+      recipe = Recipe.new()
+      allow(recipe).to receive(:original_gravity) {1.069}
+      allow(recipe).to receive(:avg_attenuation) {0.755}
+      expect((recipe.final_gravity).round(3)).to eq(1.017)
+    end
+  end
+
   context "#total_grain_weight" do
     it "should calculate the total grain weight" do
       recipe = create(:recipe)
@@ -39,6 +49,18 @@ describe Recipe do
       recipe.save
 
       expect(recipe.total_grain_weight).to eq(12.5)
+    end
+  end
+
+  context "#avg_attenuation" do
+    it "should calculate average attenuation of yeasts" do
+      recipe = create(:recipe)
+      recipe.yeasts.destroy_all
+      recipe.yeasts.build(name: "Windsor", attenuation: 75.5)
+      recipe.yeasts.build(name: "Nottingham", attenuation: 68)
+      recipe.save
+
+      expect(recipe.avg_attenuation * 100).to eq(71.75)
     end
   end
 

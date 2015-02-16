@@ -13,7 +13,9 @@
         %td #{@recipe.batch_size} gal.
       %tr
         %td Original Gravity
-        %td #{'%.3f' % @recipe.original_gravity}
+        %td #{format_gravity(@recipe.original_gravity)}
+      - if @recipe.yeasts.first
+        %tr Final Gravity: #{format_gravity(@recipe.final_gravity)}
 
     %h4 Yeast
     %table.table.table-striped
@@ -21,7 +23,7 @@
         %tr
           %td= yeast.name
           %td
-            #{yeast.attenuation*100} %
+            #{yeast.attenuation} %
 
     %h4 Grains
     %table.table.table-striped
