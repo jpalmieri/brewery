@@ -12,19 +12,10 @@ $(document).ready(function(){
     }
   });
 
-  var show_last_add_grain_button = function(){
-    $('.grain').filter( function(){ 
-      if($(this).css('display') == "block") {
-        return $(this);
-      }
-    }).last().find('button.add-grain').show();
-  };
-  show_last_add_grain_button();
+  $("button.add-grain").show();
 
   $("button.add-grain").on("click", function(event) {
-    event.preventDefault();
-    $(this).parent(".grain").nextAll(".grain").first().show();
-    $(this).hide();
-    show_last_add_grain_button();
+    event.preventDefault(); 
+    $(this).parent(".grain-list").find(".grain").not(":visible").first().show();
   });
 });

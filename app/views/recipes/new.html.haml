@@ -24,10 +24,11 @@
       - @recipe.grains.remaining_capacity.times { @recipe.grains.build }
       = form.label :grains
       = form.fields_for :grains do |grain_fields|
-        .grain
-          .form-group
-            = grain_fields.text_field :name, placeholder: "Grain #{grain_fields.index + 1} name", class: 'form-control'
-            = grain_fields.number_field :weight, step: 0.05, min: 0.05, placeholder: "Grain #{grain_fields.index + 1} weight", class: 'form-control'
+        .grain-list 
+          .grain
+            .form-group
+              = grain_fields.text_field :name, placeholder: "Grain #{grain_fields.index + 1} name", class: 'form-control'
+              = grain_fields.number_field :weight, step: 0.05, min: 0.05, placeholder: "Grain #{grain_fields.index + 1} weight", class: 'form-control'
           %button.add-grain.btn.btn-success Add grain
 
       - @recipe.hops.remaining_capacity.times { @recipe.hops.build }
