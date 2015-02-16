@@ -5,11 +5,8 @@ FactoryGirl.define do
     batch_size 2.5
 
     before(:create) do |recipe, yeast|
-      yeasts_attributes = []
-      3.times do 
-        yeasts_attributes << attributes_for(:yeast)
-      end
-      recipe.yeasts_attributes = yeasts_attributes
+      # Only allowing one Yeast on form submission for now
+      recipe.yeasts_attributes = [attributes_for(:yeast)]
     end
 
     before(:create) do |recipe, grain|
