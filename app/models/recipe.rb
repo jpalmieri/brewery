@@ -42,6 +42,18 @@ class Recipe < ActiveRecord::Base
     (((37 * brewhouse_efficiency) / (batch_size / total_grain_weight)) + 1000) / 1000
   end
 
+  def avg_attenuation
+    if yeasts.first
+      yeasts.average(:attenuation) / 100
+    else
+      0
+    end
+  end
+
+  def final_gravity
+    avg_attenuation + original_gravity + (-(original_gravity * avg_attenuation))
+  end
+
   def total_grain_weight
     grains.sum(:weight)
   end
