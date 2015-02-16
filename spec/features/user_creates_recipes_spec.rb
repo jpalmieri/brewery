@@ -6,6 +6,10 @@ feature "User creates recipe", js: true, :type => :feature do
     user = create(:user)
     sign_in(user)
     visit new_recipe_path
+
+    # Only last "Add grain" button should be visible
+    expect(page).to have_button("Add grain", count: 1)
+
     fill_in "Style", with: "Stout"
     fill_in "Yeast name", with: "Nottingham"
     fill_in "Yeast attenuation", with: "78.2"
@@ -14,6 +18,7 @@ feature "User creates recipe", js: true, :type => :feature do
   end
   
   scenario "successfully" do
+
     fill_in "Name", with: "Black Stout"
     fill_in "Grain 1 name", with: "2-row"
     fill_in "Grain 1 weight", with: "10"
@@ -115,9 +120,6 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_selector("input[value='Crystal 40L']")
     expect(page).to have_content("Grain 2 weight")
     expect(page).to have_selector("input[value='1.5']")
-
-    # Only last "Add grain" button should be visible
-    expect(page).to have_button("Add grain", count: 1)
   end
 
 end
