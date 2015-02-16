@@ -22,8 +22,9 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    if current_user.id == Recipe.find(params[:id]).user.id
-      @recipe = current_user.recipes.find(params[:id])
+    record = Recipe.find(params[:id])
+    if current_user == record.user
+      @recipe = record
     else
       flash[:error] = "You are not authorized to edit this recipe."
       redirect_to root_path
@@ -31,8 +32,9 @@ class RecipesController < ApplicationController
   end
 
   def update
-    if current_user.id == Recipe.find(params[:id]).user.id
-      @recipe = current_user.recipes.find(params[:id])
+    record = Recipe.find(params[:id])
+    if current_user == record.user
+      @recipe = record
       if @recipe.update_attributes(recipe_params)
         flash[:notice] = "Recipe updated."
         redirect_to @recipe
