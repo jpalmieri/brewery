@@ -37,13 +37,8 @@ class RecipesController < ApplicationController
         flash[:notice] = "Recipe updated."
         redirect_to @recipe
       else
-        error_list = "<ul>"
-      @recipe.errors.full_messages.each do |error|
-        error_list += "<li>#{error}</li>"
-      end
-      error_list += "</ul>"
-      flash[:error] = "There was an error saving your recipe: #{error_list}"
-      render :edit
+        flash[:error] = "There was an error saving your recipe."
+        render :edit
       end
     else
       flash[:error] = "You are not authorized to update this recipe."

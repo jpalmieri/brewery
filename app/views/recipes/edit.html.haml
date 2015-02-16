@@ -1,5 +1,10 @@
 %h1 Edit Recipe
 
+%ul
+  - @recipe.errors.full_messages.each do |error|
+    %li
+      = error
+
 = form_for @recipe do |form|
   = form.text_field :name, autofocus: true, placeholder: 'Name'
   = form.text_field :style, placeholder: 'Style'
