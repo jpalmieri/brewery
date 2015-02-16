@@ -11,8 +11,8 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_button("Add grain", count: 1)
 
     fill_in "Style", with: "Stout"
-    fill_in "Yeast name", with: "Nottingham"
-    fill_in "Yeast attenuation", with: "78.2"
+    fill_in "Enter a yeast name", with: "Nottingham"
+    fill_in "Enter the yeast's average attenuation", with: "78.2"
     fill_in "Summary", with: "A very dark stout"
     fill_in "Notes", with: "Brew very carefully..."
   end
@@ -71,8 +71,8 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_selector("input[value='Brew very carefully...']")
 
     # check that grain fields show
-    expect(page).to have_content("Grain 1 name")
-    expect(page).to have_content("Grain 1 weight")
+    expect(page).to have_selector("input[placeholder='Grain 1 name']")
+    expect(page).to have_selector("input[placeholder='Grain 1 weight']")
   end
 
   scenario "unsuccessfully, without grain and hop weights" do 
@@ -127,13 +127,13 @@ feature "User creates recipe", js: true, :type => :feature do
     click_button "Save Recipe"
 
     expect(current_path).to eq recipes_path
-    expect(page).to have_content("Grain 1 name")
+    expect(page).to have_selector("input[placeholder='Grain 1 name']")
     expect(page).to have_selector("input[value='2-row']")
-    expect(page).to have_content("Grain 1 weight")
+    expect(page).to have_selector("input[placeholder='Grain 1 weight']")
     expect(page).to have_selector("input[value='10']")
-    expect(page).to have_content("Grain 2 name")
+    expect(page).to have_selector("input[placeholder='Grain 2 name']")
     expect(page).to have_selector("input[value='Crystal 40L']")
-    expect(page).to have_content("Grain 2 weight")
+    expect(page).to have_selector("input[placeholder='Grain 2 weight']")
     expect(page).to have_selector("input[value='1.5']")
   end
 
