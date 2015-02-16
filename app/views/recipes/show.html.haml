@@ -1,27 +1,41 @@
 %h1
   = @recipe.name
+%h3
+  #{@recipe.summary}
+.row
+  .col-md-6
+    %table.table.table-striped
+      %tr
+        %td Style
+        %td #{@recipe.style}
+      %tr
+        %td Batch Size
+        %td #{@recipe.batch_size} gal.
+      %tr
+        %td Original Gravity
+        %td #{'%.3f' % @recipe.original_gravity}
 
-%p Style: #{@recipe.style}
-%p Batch Size: #{@recipe.batch_size} gal.
-%p Original Gravity: #{'%.3f' % @recipe.original_gravity}
-%p Yeast:
-%ul
-  - @recipe.yeasts.each do |yeast|
-    %li
-      = yeast.name
-      #{yeast.attenuation*100} %
-%p Summary: #{@recipe.summary}
-%p Grains:
-%ul
-  - @recipe.grains.each do |grain|
-    %li
-      = grain.name
-      #{grain.weight} lbs.
-%p Hops:
-%ul
-  - @recipe.hops.each do |hop|
-    %li
-      = hop.name
-      = hop.weight
-      = hop.boil_time
-%p Notes: #{@recipe.notes}
+    %h4 Yeast
+    %table.table.table-striped
+      - @recipe.yeasts.each do |yeast|
+        %tr
+          %td= yeast.name
+          %td
+            #{yeast.attenuation*100} %
+
+    %h4 Grains
+    %table.table.table-striped
+      - @recipe.grains.each do |grain|
+        %tr
+          %td= grain.name
+          %td
+            #{grain.weight} lbs.
+    %h4 Hops
+    %table.table.table-striped
+      - @recipe.hops.each do |hop|
+        %tr
+          %td= hop.name
+          %td= hop.weight
+          %td= hop.boil_time
+    %h4 Notes
+    %p #{@recipe.notes}
