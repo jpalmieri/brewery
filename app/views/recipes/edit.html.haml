@@ -1,4 +1,4 @@
-%h1 New Recipe
+%h1 Edit Recipe
 
 = form_for @recipe do |form|
   = form.text_field :name, autofocus: true, placeholder: 'Name'
@@ -14,12 +14,14 @@
   = form.number_field :batch_size, placeholder: 'Batch size', step: 0.05, min: 0.05
   - @recipe.grains.remaining_capacity.times { @recipe.grains.build }
   = form.fields_for :grains do |grain_fields|
-    %p
-      = grain_fields.label :name, "Grain #{grain_fields.index + 1} name"
-      = grain_fields.text_field :name
-    %p
-      = grain_fields.label :weight, "Grain #{grain_fields.index + 1} weight"
-      = grain_fields.number_field :weight, step: 0.05, min: 0.05
+    .grain
+      %p
+        = grain_fields.label :name, "Grain #{grain_fields.index + 1} name"
+        = grain_fields.text_field :name
+      %p
+        = grain_fields.label :weight, "Grain #{grain_fields.index + 1} weight"
+        = grain_fields.number_field :weight, step: 0.05, min: 0.05
+      %button.add-grain Add grain
 
   - @recipe.hops.remaining_capacity.times { @recipe.hops.build }
   = form.fields_for :hops do |hop_fields|

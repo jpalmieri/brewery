@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-  $("button.add-grain").show();
   
   // hide additional non-blank input fields
   $(".grain").each( function(index, grainElement){
@@ -11,15 +9,22 @@ $(document).ready(function(){
     });
     if(index > 0 && inputsAreBlank){
       $(grainElement).hide();
-    } else if (index > 0) {
-      $(grainElement).prev(".grain").find("button.add-grain").hide();
-      // Only show button for last non-blank input
     }
-   });
+  });
+
+  var show_last_add_grain_button = function(){
+    $('.grain').filter( function(){ 
+      if($(this).css('display') == "block") {
+        return $(this);
+      }
+    }).last().find('button.add-grain').show();
+  };
+  show_last_add_grain_button();
 
   $("button.add-grain").on("click", function(event) {
     event.preventDefault();
-    $(this).parent(".grain").next(".grain").show();
+    $(this).parent(".grain").nextAll(".grain").first().show();
     $(this).hide();
+    show_last_add_grain_button();
   });
 });

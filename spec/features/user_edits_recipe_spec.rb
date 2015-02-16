@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User edits recipe", :type => :feature do
+feature "User edits recipe", js: true, :type => :feature do
 
   before do
     user = create(:user)
@@ -10,6 +10,9 @@ feature "User edits recipe", :type => :feature do
   end
 
   scenario "successfully" do
+    # Only last "Add grain" button should be visible
+    expect(page).to have_button("Add grain", count: 1)
+
     expect(page).to have_field("Name", with: "Super dark beer")
     expect(page).to have_field("Style", with: "Black Ale")
     expect(page).to have_field("Batch size", with: "2.5")
@@ -20,7 +23,7 @@ feature "User edits recipe", :type => :feature do
     expect(page).to have_field("Hop 1 name", with: "Cascade")
     expect(page).to have_field("Hop 1 weight", with: "1.5")
     expect(page).to have_field("Summary", with: "A beer to put hair on your chest")
-    expect(page).to have_field("Notes", with: "This one will take many manly men to brew. It will also take an exorbant amount of fire and gunpowder.\n Mash low and slow; get all them sugars out of tha grains.")
+    expect(page).to have_field("Notes", with: "This one will take many manly men to brew. It will also take an exorbant amount of fire and gunpowder. Mash low and slow; get all them sugars out of tha grains.")
 
     fill_in "Name", with: "Black Stout"
     fill_in "Style", with: "Stout"
@@ -55,6 +58,9 @@ feature "User edits recipe", :type => :feature do
   end
 
   scenario "unsuccessfully, without required fields" do
+    # Only last "Add grain" button should be visible
+    expect(page).to have_button("Add grain", count: 1)
+
     fill_in "Name", with: ""
     fill_in "Batch size", with: ""
     fill_in "Grain 1 name", with: ""

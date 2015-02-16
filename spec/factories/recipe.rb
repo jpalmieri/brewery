@@ -26,7 +26,7 @@ FactoryGirl.define do
     end
 
     summary "A beer to put hair on your chest"
-    notes "This one will take many manly men to brew. It will also take an exorbant amount of fire and gunpowder.\n Mash low and slow; get all them sugars out of tha grains."
+    notes "This one will take many manly men to brew. It will also take an exorbant amount of fire and gunpowder. Mash low and slow; get all them sugars out of tha grains."
     user
   end
 end
