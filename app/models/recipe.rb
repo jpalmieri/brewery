@@ -27,7 +27,7 @@ class Recipe < ActiveRecord::Base
   end
 
   accepts_nested_attributes_for :grains, reject_if: proc { |attributes| attributes['name'].blank? && attributes['weight'].blank? }
-  accepts_nested_attributes_for :hops, reject_if: proc { |attributes| attributes['name'].blank? && attributes['weight'].blank? }
+  accepts_nested_attributes_for :hops, reject_if: proc { |attributes| attributes['name'].blank? && attributes['weight'].blank? && attributes['boil_time'].blank? }
   accepts_nested_attributes_for :yeasts, reject_if: proc { |attributes| attributes['name'].blank? || attributes['attenuation'].blank? }
 
   validates :name, presence: true

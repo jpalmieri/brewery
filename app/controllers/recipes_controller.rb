@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
       :notes,
       :batch_size,
       grains_attributes: [:name, :weight],
-      hops_attributes: [:name, :weight],
+      hops_attributes: [:name, :weight, :boil_time],
       yeasts_attributes: [:name, :attenuation]
     )
   end

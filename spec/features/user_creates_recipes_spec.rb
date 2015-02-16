@@ -28,6 +28,7 @@ feature "User creates recipe", js: true, :type => :feature do
     fill_in "Grain 2 weight", with: "2.25" 
     fill_in "Hop 1 name", with: "Cascade"
     fill_in "Hop 1 weight", with: "1.5"
+    fill_in "Hop 1 boil time", with: "60"
     fill_in "Batch size", with: "5.25"
 
     click_button "Save Recipe"
@@ -48,6 +49,7 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_content("1.065")
     expect(page).to have_content("Recipe saved.")
     expect(page).to have_content("5.25 gal.")
+    expect(page).to have_content("60")
   end
 
   scenario "unsuccessfully, without required fields" do 
@@ -97,6 +99,19 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_selector("input[value='10']")
     expect(page).to have_content("Hops name can't be blank")
     expect(page).to have_selector("input[value='1.5']")
+  end
+
+  scenario "unsuccessfully, without hop boil time" do
+    fill_in "Name", with: "Black Stout" 
+    fill_in "Hop 1 name", with: "Cascade"
+    fill_in "Hop 1 weight", with: "1.5"
+    click_button "Save Recipe"
+
+    expect(page).to have_css("h1", text: "New Recipe")
+    expect(current_path).to eq recipes_path
+    expect(page).to have_field("Hop 1 name", with: "Cascade")
+    expect(page).to have_field("Hop 1 weight", with:"1.5")
+    expect(page).to have_content("Hops boil time can't be blank")
   end
 
   scenario "unsuccessfully, additional grains persist" do 

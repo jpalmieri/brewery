@@ -30,6 +30,9 @@
     %p
       = hop_fields.label :weight, "Hop #{hop_fields.index + 1} weight"
       = hop_fields.number_field :weight, step: 0.05, min: 0.05
+    %p
+      = hop_fields.label :boil_time, "Hop #{hop_fields.index + 1} boil time"
+      = hop_fields.number_field :boil_time, step: 1, min: 0
   = form.text_field :summary, placeholder: 'Summary'
   = form.text_field :notes, placeholder: 'Notes'
   = form.submit 'Save Recipe'
