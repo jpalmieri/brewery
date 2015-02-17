@@ -56,6 +56,10 @@ class Recipe < ActiveRecord::Base
     avg_attenuation + original_gravity + (-(original_gravity * avg_attenuation))
   end
 
+  def abv
+    1.05*(original_gravity-final_gravity)/final_gravity/0.0079;
+  end
+
   def total_grain_weight
     grains.sum(:weight)
   end

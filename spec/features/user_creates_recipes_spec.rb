@@ -54,6 +54,8 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(page).to have_content("1.065")
     expect(page).to have_content("Final Gravity")
     expect(page).to have_content("1.014")
+    expect(page).to have_content("ABV")
+    expect(page).to have_content("6.64 %")
     expect(page).to have_content("Recipe saved.")
     expect(page).to have_content("5.25 gal.")
     expect(page).to have_content("60")

@@ -24,6 +24,9 @@
         %tr
           %td Final Gravity
           %td #{format_gravity(@recipe.final_gravity)}
+        %tr
+          %td ABV
+          %td #{'%.2f' % @recipe.abv} %
 
     %h4 Yeast
     %table.table.table-striped

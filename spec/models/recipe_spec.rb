@@ -40,6 +40,15 @@ describe Recipe do
     end
   end
 
+  context "#abv" do
+    it "should calculate the abv%" do
+      recipe = Recipe.new()
+      allow(recipe).to receive(:original_gravity) {1.069}
+      allow(recipe).to receive(:final_gravity) {1.016}
+      expect((recipe.abv).round(2)).to eq(6.93)
+    end
+  end
+
   context "#total_grain_weight" do
     it "should calculate the total grain weight" do
       recipe = create(:recipe)
