@@ -12,12 +12,12 @@ feature "User edits recipe", js: true, :type => :feature do
   scenario "successfully" do
     # Only last "Add grain" button should be visible
     expect(page).to have_button("Add grain", count: 1)
-
+    
     expect(page).to have_field("Name", with: "Super dark beer")
     expect(page).to have_field("Style", with: "Black Ale")
     expect(page).to have_field("Batch size", with: "2.5")
-    expect(page).to have_field("Yeast name", with: "Windsor")
-    expect(page).to have_field("Yeast attenuation", with: "75.2")
+    expect(page).to have_field("Enter a yeast name", with: "Windsor")
+    expect(page).to have_field("Enter the yeast's average attenuation", with: "75.2")
     expect(page).to have_field("Grain 1 name", with: "2-row")
     expect(page).to have_field("Grain 1 weight", with: "10")
     expect(page).to have_field("Hop 1 name", with: "Cascade")

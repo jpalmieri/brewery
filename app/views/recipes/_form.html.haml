@@ -1,0 +1,46 @@
+.row
+  .col-md-8
+    = form_for recipe do |form|
+      .form-group
+        = form.label :name
+        = form.text_field :name, autofocus: true, placeholder: 'Name this recipe', class: 'form-control'
+      .form-group
+        = form.label :style
+        = form.text_field :style, placeholder: 'Enter a beer style', class: 'form-control'
+    
+      - recipe.yeasts.remaining_capacity.times { recipe.yeasts.build }
+      = form.label :yeast
+      = form.fields_for :yeasts do |yeast_fields|
+        .form-group
+          = yeast_fields.text_field :name, placeholder: 'Enter a yeast name', class: 'form-control'
+          = yeast_fields.number_field :attenuation, placeholder: "Enter the yeast's average attenuation", min: 0.1, step: 0.1, class: 'form-control'
+
+      .form-group
+        = form.label :batch_size
+        = form.number_field :batch_size, placeholder: 'Enter the batch size in gallons', min: 0.01, step: 0.01, class: 'form-control'
+
+      - recipe.grains.remaining_capacity.times { recipe.grains.build }
+      = form.label :grains
+      .grain-list 
+        = form.fields_for :grains do |grain_fields|
+          .grain
+            .form-group
+              = grain_fields.text_field :name, placeholder: "Grain #{grain_fields.index + 1} name", class: 'form-control'
+              = grain_fields.number_field :weight, step: 0.05, min: 0.05, placeholder: "Grain #{grain_fields.index + 1} weight", class: 'form-control'
+        %button.add-grain.btn.btn-success Add grain
+
+      - recipe.hops.remaining_capacity.times { recipe.hops.build }
+      = form.label :hops
+      = form.fields_for :hops do |hop_fields|
+        .form-group
+          = hop_fields.text_field :name, placeholder: "Hop #{hop_fields.index + 1} name", class: 'form-control'
+          = hop_fields.number_field :weight, step: 0.05, min: 0.05, placeholder: "Hop #{hop_fields.index + 1} weight", class: 'form-control'
+          = hop_fields.number_field :boil_time, step: 1, min: 0, placeholder: "Hop #{hop_fields.index + 1} boil time", class: 'form-control'
+      .form-group
+        = form.label :summary
+        = form.text_field :summary, placeholder: 'Enter a short description of this recipe', class: 'form-control'
+      .form-group
+        = form.label :notes
+        = form.text_field :notes, rows: 4, placeholder: 'Enter any brewing notes', class: 'form-control'
+      .form-group
+        = form.submit 'Save Recipe', class: 'btn btn-success'
