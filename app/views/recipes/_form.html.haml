@@ -31,11 +31,14 @@
 
       - recipe.hops.remaining_capacity.times { recipe.hops.build }
       = form.label :hops
-      = form.fields_for :hops do |hop_fields|
-        .form-group
-          = hop_fields.text_field :name, placeholder: "Hop #{hop_fields.index + 1} name", class: 'form-control'
-          = hop_fields.number_field :weight, step: 0.05, min: 0.05, placeholder: "Hop #{hop_fields.index + 1} weight", class: 'form-control'
-          = hop_fields.number_field :boil_time, step: 1, min: 0, placeholder: "Hop #{hop_fields.index + 1} boil time", class: 'form-control'
+      .hop-list
+        = form.fields_for :hops do |hop_fields|
+          .hop
+            .form-group
+              = hop_fields.text_field :name, placeholder: "Hop #{hop_fields.index + 1} name", class: 'form-control'
+              = hop_fields.number_field :weight, step: 0.05, min: 0.05, placeholder: "Hop #{hop_fields.index + 1} weight", class: 'form-control'
+              = hop_fields.number_field :boil_time, step: 1, min: 0, placeholder: "Hop #{hop_fields.index + 1} boil time", class: 'form-control'
+        %button.add-hop.btn.btn-success Add hop
       .form-group
         = form.label :summary
         = form.text_field :summary, placeholder: 'Enter a short description of this recipe', class: 'form-control'

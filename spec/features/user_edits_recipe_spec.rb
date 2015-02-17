@@ -10,8 +10,9 @@ feature "User edits recipe", js: true, :type => :feature do
   end
 
   scenario "successfully" do
-    # Only last "Add grain" button should be visible
+    # Only last "Add grain/hop" button should be visible
     expect(page).to have_button("Add grain", count: 1)
+    expect(page).to have_button("Add hop", count: 1)
     
     expect(page).to have_field("Name", with: "Super dark beer")
     expect(page).to have_field("Style", with: "Black Ale")
@@ -58,8 +59,9 @@ feature "User edits recipe", js: true, :type => :feature do
   end
 
   scenario "unsuccessfully, without required fields" do
-    # Only last "Add grain" button should be visible
+    # Only last "Add grain/hop" button should be visible
     expect(page).to have_button("Add grain", count: 1)
+    expect(page).to have_button("Add hop", count: 1)
 
     fill_in "Name", with: ""
     fill_in "Batch size", with: ""

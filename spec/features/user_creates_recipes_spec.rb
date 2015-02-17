@@ -7,8 +7,9 @@ feature "User creates recipe", js: true, :type => :feature do
     sign_in(user)
     visit new_recipe_path
 
-    # Only last "Add grain" button should be visible
+    # Only last "Add grain/hop" button should be visible
     expect(page).to have_button("Add grain", count: 1)
+    expect(page).to have_button("Add hop", count: 1)
 
     fill_in "Style", with: "Stout"
     fill_in "Enter a yeast name", with: "Nottingham"
@@ -29,6 +30,10 @@ feature "User creates recipe", js: true, :type => :feature do
     fill_in "Hop 1 name", with: "Cascade"
     fill_in "Hop 1 weight", with: "1.5"
     fill_in "Hop 1 boil time", with: "60"
+    click_button "Add hop"
+    fill_in "Hop 2 name", with: "Cascade"
+    fill_in "Hop 2 weight", with: "1.5"
+    fill_in "Hop 2 boil time", with: "30"
     fill_in "Batch size", with: "5.25"
 
     click_button "Save Recipe"

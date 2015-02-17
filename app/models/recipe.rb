@@ -7,14 +7,14 @@ class Recipe < ActiveRecord::Base
     # More about Association Extensions:
     # http://guides.rubyonrails.org/association_basics.html#association-extensions
     def remaining_capacity
-      max_capacity = 3
+      max_capacity = 10
       max_capacity - proxy_association.target.size
     end
   end
 
   has_many :hops, dependent: :destroy do
     def remaining_capacity
-      max_capacity = 2
+      max_capacity = 10
       max_capacity - proxy_association.target.size
     end
   end
