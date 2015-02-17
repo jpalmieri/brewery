@@ -67,10 +67,12 @@ feature "User edits recipe", js: true, :type => :feature do
     fill_in "Grain 1 weight", with: ""
     fill_in "Hop 1 name", with: ""
     fill_in "Hop 1 weight", with: ""
+    fill_in "Hop 1 boil time", with: ""
     fill_in "Grain 2 name", with: ""
     fill_in "Grain 2 weight", with: ""
     fill_in "Hop 2 name", with: ""
     fill_in "Hop 2 weight", with: ""
+    fill_in "Hop 2 boil time", with: ""
     fill_in "Grain 3 name", with: ""
     fill_in "Grain 3 weight", with: ""
 
@@ -81,7 +83,7 @@ feature "User edits recipe", js: true, :type => :feature do
     expect(page).to have_content("There was an error saving your recipe")
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("must include name and weight of at least one grain")
-    expect(page).to have_content("must include name and weight of at least one hop")
+    expect(page).to have_content("must fill out all hop fields")
     expect(page).to have_content("Batch size is not a number")
   end
 

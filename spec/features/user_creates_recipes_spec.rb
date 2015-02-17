@@ -86,7 +86,7 @@ feature "User creates recipe", js: true, :type => :feature do
     expect(current_path).to eq recipes_path
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("must include name and weight of at least one grain")
-    expect(page).to have_content("must include name and weight of at least one hop")
+    expect(page).to have_content("must fill out all hop fields")
     expect(page).to have_content("Batch size is not a number")
 
     # check that field values persist

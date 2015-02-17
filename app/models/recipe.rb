@@ -35,7 +35,7 @@ class Recipe < ActiveRecord::Base
   validates :name, presence: true
   validates :user_id, presence: true
   validates_presence_of :grains,  message: "must include name and weight of at least one grain"
-  validates_presence_of :hops,  message: "must include name and weight of at least one hop"
+  validates_presence_of :hops,  message: "must fill out all hop fields"
   validates_numericality_of :batch_size
   
 
