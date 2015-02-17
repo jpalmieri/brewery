@@ -1,7 +1,13 @@
-%h1
-  = @recipe.name
-%h3
-  #{@recipe.summary}
+.row
+  .col-md-8
+    %h1= @recipe.name
+  .col-md-4
+    .btn-group{role: "group"}
+      .btn.btn-success= link_to "Edit", edit_recipe_path(@recipe)
+      .btn.btn-danger= link_to "Delete", "#"
+
+%p.lead= @recipe.summary
+
 .row
   .col-md-6
     %table.table.table-striped
