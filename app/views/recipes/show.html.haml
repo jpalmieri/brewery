@@ -45,7 +45,9 @@
       - @recipe.hops.each do |hop|
         %tr
           %td= hop.name
-          %td= hop.weight
-          %td= hop.boil_time
+          %td
+            #{hop.weight} oz.
+          %td
+            #{hop.boil_time} min.
     %h4 Notes
     %p #{@recipe.notes}
