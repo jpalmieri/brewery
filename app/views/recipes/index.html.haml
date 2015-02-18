@@ -1,0 +1,9 @@
+%h1 All Recipes
+
+.row
+  .col-md-8
+    - @recipes.each do |recipe|
+      .media
+        .media-body
+          %h4.media-heading= link_to recipe.name, recipe
+          %small= recipe.summary

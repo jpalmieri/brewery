@@ -14,6 +14,10 @@
           %li{class: 'active'}= link_to "New Recipe", new_recipe_path
         - else
           %li= link_to "New Recipe", new_recipe_path  
+        - if current_page?(recipes_path)
+          %li{class: 'active'}= link_to "All Recipes", recipes_path
+        - else
+          %li= link_to "All Recipes", recipes_path 
 
       %ul.user-info.nav.navbar-nav.navbar-right
         - if user_signed_in?
