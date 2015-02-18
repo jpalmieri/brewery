@@ -1,2 +1,5 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.erb
+.bs-component
+  .jumbotron
+    %h1 Let's brew, dude!
+    %p Welcome to the Brewery, a tool to create and discover homebrew recipes. Click on the button below to sign up and get started with your own recipe, or #{link_to "browse our recipe list", recipes_path}.
+    %p.btn.btn-primary.btn-lg= link_to "Sign up", new_user_registration_path
