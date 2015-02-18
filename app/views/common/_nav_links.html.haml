@@ -1,0 +1,6 @@
+%ul.nav.navbar-nav
+  - options.each do |link_text, target|
+    - if current_page?(target)
+      %li.active= link_to link_text, target
+    - else
+      %li= link_to link_text, target
