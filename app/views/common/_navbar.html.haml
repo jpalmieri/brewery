@@ -9,9 +9,8 @@
       %a.navbar-brand{href: root_path} Brewery
 
     .collapse.navbar-collapse#bs-example-navbar-collapse-1
-      %ul.nav.navbar-nav
-        = render partial: 'common/nav_links', locals: { options: { "New Recipe" => new_recipe_path, 
-        "All Recipes" => recipes_path }}
+      = render partial: 'common/nav_links', locals: { options: { "New Recipe" => new_recipe_path, 
+      "All Recipes" => recipes_path }}
 
       %ul.user-info.nav.navbar-nav.navbar-right
         - if user_signed_in?
