@@ -7,7 +7,7 @@ feature "Sign in flow" do
       user = create(:user)
       sign_in(user)
 
-      expect(current_path).to eq root_path
+      expect(current_path).to eq recipes_path
       expect(page).to_not have_css(".user-info", text: "Sign In")
       expect(page).to have_css(".user-info", text: user.name)
     end
