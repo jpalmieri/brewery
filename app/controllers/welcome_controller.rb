@@ -1,10 +1,6 @@
 class WelcomeController < ApplicationController
+
   def index
-  end
-
-  def about
-  end
-
-  def contact
+    redirect_to recipes_path if user_signed_in?
   end
 end
