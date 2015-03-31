@@ -94,7 +94,7 @@ feature "User edits recipe", js: true, :type => :feature do
     other_recipe = create(:recipe, user: other_user)
     visit edit_recipe_path(other_recipe)
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq recipes_path
     expect(page).to have_content("You are not authorized to edit this recipe.")
   end
 end

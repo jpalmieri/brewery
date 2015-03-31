@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  get 'welcome/about'
-  get 'welcome/contact'
 
   resources :recipes, only: [:new, :create, :show, :index, :edit, :update]
 
