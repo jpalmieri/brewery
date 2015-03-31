@@ -19,7 +19,9 @@ feature "View all recipes", js: true do
 
     expect( page ).to have_content(@recipe1.name)
     expect( page ).to have_content(@recipe1.summary)
+    expect( page ).to have_css("div.recipe-owner", text: @recipe1.user.name)
     expect( page ).to have_content(@recipe2.name)
     expect( page ).to have_content(@recipe2.summary)
+    expect( page ).to have_css("div.recipe-owner", text: @recipe2.user.name)
   end
 end
