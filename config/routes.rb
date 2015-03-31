@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :recipes, only: [:new, :create, :show, :index, :edit, :update]
+  resources :recipes, only: [:new, :create, :destroy, :show, :index, :edit, :update]
 
   root to: 'welcome#index'
 

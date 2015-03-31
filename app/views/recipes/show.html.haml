@@ -5,7 +5,7 @@
     .btn-group{role: "group"}
       .btn.btn-success= link_to "Edit", edit_recipe_path(@recipe)
       - if current_user == @recipe.user
-        .btn.btn-danger= link_to "Delete", "#"
+        .btn.btn-danger= link_to "Delete", @recipe, method: :delete
 
 %p.lead= @recipe.summary
 

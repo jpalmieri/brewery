@@ -16,7 +16,7 @@ feature "User deletes recipe", js: true, :type => :feature do
 
     expect(Recipe.count).to eq(1)
     expect(current_path).to eq(recipes_path)
-    expect page.to have_content "Recipe deleted."
+    expect(page).to have_content "Recipe deleted."
   end
 
   scenario "unsuccessfully, user doesn't own recipe" do 

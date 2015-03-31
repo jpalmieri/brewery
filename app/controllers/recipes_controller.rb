@@ -48,6 +48,23 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    record = Recipe.find(params[:id])
+    if current_user == record.user
+      @recipe = record
+      if @recipe.destroy
+        flash[:notice] = "Recipe deleted."
+        redirect_to recipes_path
+      else
+        flash[:error] = "There was an error deleting your recipe."
+        render :edit
+      end
+    else
+      flash[:error] = "You are not authorized to delete this recipe."
+      redirect_to @recipe
+    end
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
   end
