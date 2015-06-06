@@ -7,3 +7,5 @@
         .media-body
           %h4.media-heading= link_to recipe.name, recipe
           %small= recipe.summary
+          %div.recipe-owner
+            %em= recipe.user.name

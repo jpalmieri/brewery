@@ -3,8 +3,8 @@ require 'rails_helper'
 feature "User creates recipe", js: true, :type => :feature do
 
   before do
-    user = create(:user)
-    sign_in(user)
+    @user = create(:user)
+    sign_in(@user)
     visit new_recipe_path
 
     # Only last "Add grain/hop" button should be visible
@@ -40,6 +40,7 @@ feature "User creates recipe", js: true, :type => :feature do
 
     expect(Recipe.count).to eq(1)
     expect(current_path).to eq recipe_path(Recipe.first)
+    expect(page).to have_css("small", text: @user.name)
     expect(page).to have_content("Black Stout")
     expect(page).to have_content("Nottingham")
     expect(page).to have_content("78.2 %")
